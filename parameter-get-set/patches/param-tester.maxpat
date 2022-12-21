@@ -114,7 +114,7 @@
 						}
 ,
 						"classnamespace" : "rnbo",
-						"rect" : [ 882.0, 281.0, 339.0, 395.0 ],
+						"rect" : [ 719.0, 301.0, 339.0, 395.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -713,7 +713,7 @@
 						"export_config" : 						{
 							"cpp-export" : 							{
 								"cpp-code-export" : 								{
-									"export_name" : "am-mod.cpp"
+									"export_name" : "param-tester.cpp"
 								}
 
 							}
