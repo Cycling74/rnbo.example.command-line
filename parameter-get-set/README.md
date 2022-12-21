@@ -14,7 +14,7 @@ called "anton.aif" in the src directory, producing a stereo output file called
 
 1. Open the patch in `patches/param-tester.maxpat`
 2. Export that patch into `export`
-3. Make a directory in `build`
+3. Make a `build` directory in `/parameter-get-set`
 4. `cd build && cmake ..`
 5. `cmake --build .`
 6. This will create an executable `RNBOCommandLine`. Run this to see the output.
