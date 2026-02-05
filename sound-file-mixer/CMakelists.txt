@@ -11,12 +11,32 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+include(FetchContent)
+
 # --------------------------------------------------------------------
+# libsndfile via FetchContent
+# --------------------------------------------------------------------
+FetchContent_Declare(
+    libsndfile
+    GIT_REPOSITORY https://github.com/libsndfile/libsndfile.git
+    GIT_TAG        1.2.2   # or any version you prefer
+)
+
+# Optional: disable features you don't need to reduce build time
+set(BUILD_PROGRAMS OFF CACHE BOOL "" FORCE)
+set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
+set(ENABLE_EXTERNAL_LIBS OFF CACHE BOOL "" FORCE)
+
+FetchContent_MakeAvailable(libsndfile)
+
+# libsndfile provides the target: sndfile
+# --------------------------------------------------------------------
+
 # Main executable
-# --------------------------------------------------------------------
 add_executable(RNBOCommandLine
     main.cpp
-    export/param-tester.cpp
+    export/sound-file-mixer.cpp
     export/rnbo/RNBO.cpp
 )
 
@@ -25,6 +45,12 @@ target_include_directories(RNBOCommandLine
     PRIVATE
         export/rnbo
         export/rnbo/common
+)
+
+# Link against libsndfile
+target_link_libraries(RNBOCommandLine
+    PRIVATE
+        sndfile
 )
 
 # --------------------------------------------------------------------

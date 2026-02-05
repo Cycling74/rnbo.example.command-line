@@ -1,0 +1,46 @@
+{
+  "parameters": [],
+  "numParameters": 0,
+  "numSignalInParameters": 0,
+  "numSignalOutParameters": 0,
+  "numInputChannels": 0,
+  "numOutputChannels": 1,
+  "numMidiInputPorts": 0,
+  "numMidiOutputPorts": 0,
+  "transportUsed": true,
+  "externalDataRefs": [
+    {
+      "id": "file1",
+      "file": "anton.aif",
+      "type": "Float32Buffer",
+      "tag": "buffer~"
+    },
+    {
+      "id": "file2",
+      "file": "jongly.aif",
+      "type": "Float32Buffer",
+      "tag": "buffer~"
+    }
+  ],
+  "patcherSerial": 0,
+  "inports": [],
+  "outports": [],
+  "inlets": [],
+  "outlets": [
+    {
+      "type": "signal",
+      "index": 1,
+      "tag": "out1",
+      "meta": ""
+    }
+  ],
+  "presetid": "rnbo",
+  "meta": {
+    "architecture": "x64",
+    "filename": "sound-file-mixer.maxpat",
+    "rnboobjname": "rnbomatic",
+    "maxversion": "9.1.1",
+    "rnboversion": "1.4.3-control.2",
+    "name": "untitled"
+  }
+}

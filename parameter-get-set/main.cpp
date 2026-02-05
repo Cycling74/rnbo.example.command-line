@@ -17,7 +17,7 @@ class LoggingParameterHandler : EventHandler {
   void handleParameterEvent(const ParameterEvent& event) override {
     fprintf(
       stdout, 
-      "ParameterEvent: parameterIndex=%d time=%.3f value=%.4f source=%p\n",
+      "ParameterEvent: parameterIndex=%zu time=%.3f value=%.4f source=%p\n",
       event.getIndex(),
       event.getTime(),
       event.getValue(),

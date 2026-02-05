@@ -1,3 +1,4 @@
 .DS_Store
-parameter-get-set/RNBOCommandLine
-parameter-get-set/build
+*/RNBOCommandLine
+*/build
+.cache
