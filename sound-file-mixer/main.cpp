@@ -51,7 +51,7 @@ int main(int argc, const char * argv[]) {
                 const uint32_t numItems = sndfile.frames() * sndfile.channels();
                 float* buffer = new float[numItems];
                 
-                // Get the raw pointer to read into
+                // Read the audio samples in
                 sf_count_t readSamples = sndfile.readf(buffer, sndfile.frames());
                 
                 // Give the memory to RNBO
