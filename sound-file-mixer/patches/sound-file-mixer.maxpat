@@ -1358,7 +1358,15 @@
                                     "source": [ "obj-9", 0 ]
                                 }
                             }
-                        ]
+                        ],
+                        "export_config": {
+                            "cpp-export": {
+                                "cpp-code-export": {
+                                    "export_name": "sound-file-mixer.cpp",
+                                    "copy_dependencies": 1
+                                }
+                            }
+                        }
                     },
                     "patching_rect": [ 58.0, 56.0, 85.0, 22.0 ],
                     "rnboattrcache": {                    },
