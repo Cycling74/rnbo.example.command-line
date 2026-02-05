@@ -2,3 +2,4 @@
 */RNBOCommandLine
 */build
 .cache
+*/output.*

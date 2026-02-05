@@ -6,6 +6,8 @@
 #include <unistd.h>
 #include <fstream>
 #include <sstream>
+#include <vector>
+#include <algorithm>
 #include <sndfile.hh>
 
 using RNBO::CoreObject;
@@ -69,20 +71,40 @@ int main(int argc, const char * argv[]) {
         }
     }
     
-    rnboObject.prepareToProcess(44100, 64);
+    const int sampleRate = 44100;
+    const int blockSize = 64;
+    const int totalSamples = 44100; // 1 second of audio
+    const int numBlocks = (totalSamples + blockSize - 1) / blockSize;
+
+    rnboObject.prepareToProcess(sampleRate, blockSize);
     RNBO::SampleValue** inputs = nullptr;
     RNBO::SampleValue** outputs = new RNBO::SampleValue*[1];
-    outputs[0] = new RNBO::SampleValue[64];
-    
-    for (int i = 0; i < 100; i++) {
-        rnboObject.process(inputs, 0, outputs, 1, 64);
+    outputs[0] = new RNBO::SampleValue[blockSize];
+
+    // Buffer to accumulate all output samples
+    std::vector<float> outputBuffer(totalSamples);
+    int samplesWritten = 0;
+
+    for (int i = 0; i < numBlocks && samplesWritten < totalSamples; i++) {
+        rnboObject.process(inputs, 0, outputs, 1, blockSize);
+
+        // Copy samples to output buffer
+        int samplesToCopy = std::min(blockSize, totalSamples - samplesWritten);
+        for (int j = 0; j < samplesToCopy; j++) {
+            outputBuffer[samplesWritten + j] = static_cast<float>(outputs[0][j]);
+        }
+        samplesWritten += samplesToCopy;
     }
-    
-    std::cout << "\nFirst 5 output samples: " << "\n";
-    for (int i = 0; i < 5; i++) {
-        std::cout << outputs[0][i] << "\n";
-    } 
-    
+
+    // Write output to AIFF file
+    SndfileHandle outFile("./output.aif", SFM_WRITE, SF_FORMAT_AIFF | SF_FORMAT_PCM_16, 1, sampleRate);
+    if (outFile) {
+        outFile.write(outputBuffer.data(), totalSamples);
+        std::cout << "\nWrote " << totalSamples << " samples to ./output.aif\n";
+    } else {
+        std::cerr << "\nFailed to create output file\n";
+    }
+
     delete [] outputs[0];
     delete [] outputs;
     
